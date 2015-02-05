@@ -19,7 +19,7 @@ var game = new Phaser.Game(800, 1200, Phaser.CANVAS, 'game', { preload: preload,
 function preload() {
 
     game.load.image('backdrop', 'assets/Night_Sky.png');
-    game.load.image('card', 'assets/F-22.png');
+    game.load.image('card', 'assets/F-22.PNG');
 	game.load.audio('Musik', ['assets/Air Battle.ogg']);
 	game.load.audio('soundOfFreedom', ['assets/F-14 Tomcat fly by with sonic boom.wav', 'assets/F-14 Tomcat fly by with sonic boom.ogg']);
 }
