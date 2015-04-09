@@ -43,6 +43,7 @@ var edice;
 var fDice;
 var efDice;
 var mDice;
+var dieDie;
 var movDie;
 var cursors;
 var holUp;
@@ -84,6 +85,9 @@ function create() {
 	eturnTimer.start();
 	timer.start();
 	etimer.start();
+	dieDie = game.time.create(false);
+	dieDie.loop(10, rollDie, this);
+	dieDie.start();
 	game.physics.p2.enable(card);
 	for (var i = 0; i<10; i++)
 	{
@@ -206,9 +210,12 @@ function dirChange()
 	}
 	//card.body.velocity = holUp;
 }
-function update() 
+function rollDie()
 {
 	movDie = game.rnd.integerInRange(0,18);
+}
+function update() 
+{
 	game.physics.arcade.collide(card, enemies);
     game.physics.arcade.collide(enemies, enemies);
 	game.physics.arcade.overlap(bullets, enemies, explode, null, this);
@@ -229,5 +236,6 @@ function update()
 function render() {
 	  game.debug.text('Time until move: ' + timer.duration.toFixed(0), 32, 32);
 	  game.debug.text('Time until turn: ' + turnTimer.duration.toFixed(0), 32, 42);
+	  game.debug.text('Time until turn: ' + turnTimer.duration.toFixed(0), 32, 52);
 }
 };
