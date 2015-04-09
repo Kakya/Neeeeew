@@ -86,7 +86,7 @@ function create() {
 	timer.start();
 	etimer.start();
 	dieDie = game.time.create(false);
-	dieDie.loop(10, rollDie, this);
+	dieDie.loop(100, rollDie, this);
 	dieDie.start();
 	game.physics.p2.enable(card);
 	for (var i = 0; i<10; i++)
