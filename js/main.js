@@ -188,6 +188,7 @@ function dirChange()
 	dice = game.rnd.integerInRange(0, 18)
 	if(movDie >= 0 && movDie < 4)
 	{
+		card.body.velocity = 0;
 		if(dice > 0 && dice < 4)
 		{
 			card.body.angularVelocity += game.rnd.integerInRange(1, 25);
