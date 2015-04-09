@@ -133,7 +133,7 @@ function dirChange()
 	{
 		card.body.angularAcceleration += game.rnd.integerInRange(1, 250);
 	}
-	else if(dice > 4 && dice < 10)
+	else if(dice > 4 && dice < 8)
 	{
 		card.body.angularAcceleration += game.rnd.integerInRange(-250, -1);
 	}
