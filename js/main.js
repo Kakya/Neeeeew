@@ -61,6 +61,7 @@ function create() {
     game.physics.enable(card, Phaser.Physics.ARCADE);
 	timer = game.time.create(false);
 	timer.loop(5000, stepChange, this);
+	timer.start();
 	for (var i = 0; i<10; i++)
 	{
 		var e = enemies.create(card.x+game.rnd.integerInRange(1000,2000), game.world.randomY, 'enemy');
