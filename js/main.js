@@ -77,6 +77,17 @@ function fire()
 		bullet.body.velocity.y=600;
     }
 }
+function fly(enemy)
+{
+	
+	enemy.body.velocity.x = game.rnd.integerInRange(-100, -300);
+	enemy.body.velocity.y = 0;
+	game.world.wrap(enemy, 0, true);
+}
+function kill(enemy)
+{
+	enemy.kill();
+}
 function explode(bullet, enemy)
 {
 	bullet.kill();
