@@ -88,7 +88,7 @@ function update()
 	game.physics.arcade.overlap(eBullets, card, pexplode, null, this);
 	
     card.body.velocity.x = game.rnd.integerInRange(0, 600);
-    card.body.velocity.y = game.rnd.integerInRange(0;
+    card.body.velocity.y = game.rnd.integerInRange(0,600);
 	
 	game.world.wrap(card, 0, true);
 	enemies.forEach(fly, this, true);
