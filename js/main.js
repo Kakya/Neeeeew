@@ -33,6 +33,7 @@ var enextFire = 0;
 var eBullets;
 var enemies;
 var enemy;
+var killedEnemy;
 function create() {
 	game.physics.startSystem(Phaser.Physics.ARCADE);
     game.world.setBounds(0, 0, 2560, 1600);
@@ -62,9 +63,6 @@ function create() {
 		e.anchor.setTo(0.5, 0.5);
 		game.physics.enable(e, Phaser.Physics.ARCADE);
 	}
-    cursors = game.input.keyboard.createCursorKeys();
- 
-
 }
 function fire() 
 {
@@ -78,6 +76,17 @@ function fire()
 		bullet.body.velocity.x=0;
 		bullet.body.velocity.y=600;
     }
+}
+function explode(bullet, enemy)
+{
+	bullet.kill();
+	enemy.kill();
+	killedEnemy++;
+}
+function pexplode(bullet, card)
+{
+	bullet.kill();
+	card.kill();
 }
 function update() 
 {
