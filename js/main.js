@@ -42,6 +42,7 @@ var dice;
 var edice;
 var fDice;
 var efDice;
+var mDice;
 function create() {
 	game.physics.startSystem(Phaser.Physics.ARCADE);
     game.world.setBounds(0, 0, 2560, 1600);
@@ -108,11 +109,11 @@ function eDirChange(enemy)
 	edice = game.rnd.integerInRange(0, 18)
 	if(edice >0 && edice <4)
 	{
-		enemy.body.angularAcceleration += game.rnd.integerInRange(1, 25);
+		enemy.body.angularVelocity += game.rnd.integerInRange(1, 25);
 	}
 	else if(edice > 4 && edice < 8)
 	{
-		enemy.body.angularAcceleration += game.rnd.integerInRange(-25, -1);
+		enemy.body.angularVelocity += game.rnd.integerInRange(-25, -1);
 	}
 	else
 	{
@@ -157,7 +158,14 @@ function enemyFires(enemy)
 }
 function stepChange()
 {
-	card.body.velocity.y = game.rnd.integerInRange(-30,60);
+	mDice = game.rnd.integerInRange(0, 18)
+	if (mDice >0 && <9)
+	{
+		game.physics.arcade.velocityFromAngle(card.angle, 300, card.body.velocity);
+	else if (mDice >9 && < 13)
+	{
+		game.physics.arcade.velocityFromAngle(card.angle, 300, card.body.velocity);
+	}
 }
 function dirChange()
 {
