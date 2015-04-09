@@ -187,7 +187,7 @@ function stepChange()
 function dirChange()
 {
 	dice = game.rnd.integerInRange(0, 18)
-	holUp = card.body.velocity;
+	//holUp = card.body.velocity;
 	if(movDie >= 0 && movDie < 4)
 	{
 		card.body.velocity = 0;
@@ -204,7 +204,7 @@ function dirChange()
 			card.body.angularVelocity = 0;
 		}
 	}
-	card.body.velocity = holUp;
+	//card.body.velocity = holUp;
 }
 function update() 
 {
