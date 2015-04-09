@@ -53,7 +53,7 @@ function create() {
 	enemies = game.add.group(); 
 	enemies.enableBody = true;
     game.camera.follow(card);
-	card.anchor.setTo(0.5, 0.5);
+	card.anchor.set(0.5);
 	//card.scale = 1;
 	bullets = game.add.group();
     bullets.enableBody = true;
