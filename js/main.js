@@ -166,11 +166,11 @@ function stepChange()
 	mDice = game.rnd.integerInRange(0, 18);
 	if (mDice > 0 && mDice < 9)
 	{
-		game.physics.arcade.accelerationFromRotation(card.rotation, 200, card.body.acceleration);
+		game.physics.arcade.accelerationFromRotation(card.rotation, game.rnd.integerInRange(1,60), card.body.acceleration);
 	}
 	else if (mDice > 9 && mDice < 13)
 	{
-		game.physics.arcade.accelerationFromRotation(card.rotation, 200, card.body.acceleration);
+		game.physics.arcade.accelerationFromRotation(card.rotation, game.rnd.integerInRange(-30,-1), card.body.acceleration);
 	}
 }
 function dirChange()
