@@ -159,7 +159,7 @@ function enemyFires(enemy)
 function stepChange()
 {
 	mDice = game.rnd.integerInRange(0, 18)
-	if (mDice >0 && <9)
+	if (mDice >0 && < 9)
 	{
 		game.physics.arcade.velocityFromAngle(card.angle, 300, card.body.velocity);
 	}
