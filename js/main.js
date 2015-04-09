@@ -46,6 +46,8 @@ var mDice;
 var cursors;
 function create() {
 	game.physics.startSystem(Phaser.Physics.ARCADE);
+	game.physics.startSystem(Phaser.Physics.P2JS);
+	game.physics.p2.defaultRestitution = 0.8;
     game.world.setBounds(0, 0, 2560, 1600);
     game.add.sprite(0, 0, 'backdrop');
     card = game.add.sprite(300, 300, 'card');
@@ -80,6 +82,7 @@ function create() {
 	eturnTimer.start();
 	//timer.start();
 	//etimer.start();
+	game.physics.p2.enable(card);
 	for (var i = 0; i<10; i++)
 	{
 		var e = enemies.create(card.x+game.rnd.integerInRange(1000,2000), game.world.randomY, 'enemy');
@@ -196,7 +199,7 @@ function update()
 	fDice = game.rnd.integerInRange(0,18)
 	 if (cursors.up.isDown)
     {
-        game.physics.arcade.accelerationFromRotation(card.rotation, 200, card.body.acceleration);
+        card.body.thrust(200);
     }
     else
     {
