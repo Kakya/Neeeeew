@@ -36,6 +36,7 @@ var enemy;
 var killedEnemy;
 var timer; 
 var turnTimer;
+var dice;
 function create() {
 	game.physics.startSystem(Phaser.Physics.ARCADE);
     game.world.setBounds(0, 0, 2560, 1600);
@@ -127,7 +128,15 @@ function stepChange()
 }
 function dirChange()
 {
-	card.body.angularAcceleration += game.rnd.integerInRange(-250, 250);
+	dice = game.rnd.integerInRange(0, 18)
+	if(dice >0 && dice <4)
+	{
+		card.body.angularAcceleration += game.rnd.integerInRange(1, 250);
+	}
+	else if(dice > 4 && dice < 10)
+	{
+		card.body.angularAcceleration += game.rnd.integerInRange(-250, -1);
+	}
 }
 function update() 
 {
@@ -143,6 +152,6 @@ function update()
 
 function render() {
 	  game.debug.text('Time until move: ' + timer.duration.toFixed(0), 32, 32);
-	  game.debug.text('Time until turn: ' + turnTimer.duration.toFixed(0), 42, 32);
+	  game.debug.text('Time until turn: ' + turnTimer.duration.toFixed(0), 32, 42);
 }
 };
