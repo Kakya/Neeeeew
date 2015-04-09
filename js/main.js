@@ -80,9 +80,9 @@ function fire()
 function fly(enemy)
 {
 	
-	enemy.body.velocity.x = game.rnd.integerInRange(0, 50);
-	enemy.body.velocity.y = 0;
-	game.world.wrap(enemy, 0, true);
+	enemy.body.velocity.x = game.rnd.integerInRange(-60, -60);
+	enemy.body.velocity.y = game.rnd.integerInRange(-60, -60);
+	game.world.wrap(enemy, 0, false);
 }
 function kill(enemy)
 {
@@ -119,10 +119,10 @@ function update()
 	game.physics.arcade.overlap(bullets, enemies, explode, null, this);
 	game.physics.arcade.overlap(eBullets, card, pexplode, null, this);
 	
-    card.body.velocity.x = game.rnd.integerInRange(0, 60);
-    card.body.velocity.y = game.rnd.integerInRange(0,60);
+    card.body.velocity.x = game.rnd.integerInRange(-60, 60);
+    card.body.velocity.y = game.rnd.integerInRange(-60,60);
 	
-	game.world.wrap(card, 0, true);
+	game.world.wrap(card, 0, false);
 	enemies.forEach(fly, this, true);
     fire();
 	enemies.forEach(enemyFires, this, true);
