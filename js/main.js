@@ -18,67 +18,82 @@ var game = new Phaser.Game(800, 1200, Phaser.CANVAS, 'game', { preload: preload,
 
 function preload() {
 
-    game.load.image('backdrop', 'assets/Night_Sky.png');
-    game.load.image('card', 'assets/F-22.PNG');
-	game.load.audio('Musik', ['assets/Air Battle.ogg']);
-	game.load.audio('soundOfFreedom', ['assets/F-14 Tomcat fly by with sonic boom.wav', 'assets/F-14 Tomcat fly by with sonic boom.ogg']);
+    game.load.image('backdrop', 'assets/desert.png');
+    game.load.image('card', 'assets/player_4.png');
+	game.load.image('bullet', 'assets/Bullet.png');
+	game.load.image('enemy', 'assets/Inf.png');
 }
 
 var card;
-var cursors;
-var music;
-
+var bullets;
+var fireRate = 100;
+var nextFire = 0;
+var efireRate = 100;
+var enextFire = 0;
+var eBullets;
+var enemies;
+var enemy;
 function create() {
 	game.physics.startSystem(Phaser.Physics.ARCADE);
     game.world.setBounds(0, 0, 2560, 1600);
     game.add.sprite(0, 0, 'backdrop');
-
     card = game.add.sprite(200, 200, 'card');
-
+	card.enableBody = true;
+	enemies = game.add.group(); 
+	enemies.enableBody = true;
     game.camera.follow(card);
 	card.anchor.setTo(0.5, 0.5);
-
+	bullets = game.add.group();
+    bullets.enableBody = true;
+    bullets.physicsBodyType = Phaser.Physics.ARCADE;
+	bullets.createMultiple(2, 'bullet');
+    bullets.setAll('checkWorldBounds', true);
+    bullets.setAll('outOfBoundsKill', true);
+	eBullets = game.add.group();
+    eBullets.enableBody = true;
+    eBullets.physicsBodyType = Phaser.Physics.ARCADE;
+	eBullets.createMultiple(2, 'eabullet');
+    eBullets.setAll('checkWorldBounds', true);
+    eBullets.setAll('outOfBoundsKill', true);
     game.physics.enable(card, Phaser.Physics.ARCADE);
-
+	for (var i = 0; i<10; i++)
+	{
+		var e = enemies.create(card.x+game.rnd.integerInRange(1000,2000), game.world.randomY, 'enemy');
+		e.anchor.setTo(0.5, 0.5);
+		game.physics.enable(e, Phaser.Physics.ARCADE);
+	}
     cursors = game.input.keyboard.createCursorKeys();
-    card.body.maxAngular = 4000;
-
-    card.body.angularDrag = 50;
-	
-    music = game.add.audio('Musik');
-
-    music.play();
-	music = game.add.audio('soundOfFreedom');
-
-    music.play();
+ 
 
 }
-
-function update() {
-
-    card.body.velocity.x = 0;
-    card.body.velocity.y = 0;
-    card.body.angularVelocity = 0;
-
-    card.body.angularAcceleration = 0;
-
-    if (game.input.keyboard.isDown(Phaser.Keyboard.A))
+function fire() 
+{
+    if (game.time.now > nextFire && bullets.countDead() > 0)
     {
-        card.body.angularAcceleration -= 2500;
+        nextFire = game.time.now + fireRate;
+
+        var bullet = bullets.getFirstDead();
+
+        bullet.reset(card.x - 8, card.y - 8);
+		bullet.body.velocity.x=0;
+		bullet.body.velocity.y=600;
     }
-    else if (game.input.keyboard.isDown(Phaser.Keyboard.D))
-    {
-        card.body.angularAcceleration += 2500;
-    }
-
-
-    if (game.input.keyboard.isDown(Phaser.Keyboard.W))
-    {
-        game.physics.arcade.velocityFromAngle(card.angle, 300, card.body.velocity);
-    }
-
-    game.world.wrap(card, 0, true);
-
+}
+function update() 
+{
+	game.physics.arcade.collide(card, enemies);
+    game.physics.arcade.collide(enemies, enemies);
+	//game.physics.arcade.overlap(enemies, bullets, kill, null, this);
+	game.physics.arcade.overlap(bullets, enemies, explode, null, this);
+	game.physics.arcade.overlap(eBullets, card, pexplode, null, this);
+	
+    card.body.velocity.x = game.rnd.integerInRange(0, 600);
+    card.body.velocity.y = game.rnd.integerInRange(0;
+	
+	game.world.wrap(card, 0, true);
+	enemies.forEach(fly, this, true);
+    fire();
+	enemies.forEach(enemyFires, this, true);
 }
 
 function render() {
