@@ -164,7 +164,7 @@ function enemyFires(enemy)
 }
 function stepChange()
 {
-	if(movDie > 5 && movDie < 12)
+	if(movDie >= 5 && movDie < 15)
 	{
 		mDice = game.rnd.integerInRange(0, 18);
 		if (mDice >= 0 && mDice < 9)
@@ -186,7 +186,7 @@ function stepChange()
 function dirChange()
 {
 	dice = game.rnd.integerInRange(0, 18)
-	if(movDie > 0 && movDie < 4)
+	if(movDie >= 0 && movDie < 4)
 	{
 		if(dice > 0 && dice < 4)
 		{
