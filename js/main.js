@@ -127,7 +127,7 @@ function stepChange()
 }
 function dirChange()
 {
-	card.body.angularAcceleration += game.rnd.integerInRange(-2500, 2500);
+	card.body.angularAcceleration += game.rnd.integerInRange(-250, 250);
 }
 function update() 
 {
