@@ -236,6 +236,6 @@ function update()
 function render() {
 	  game.debug.text('Time until move: ' + timer.duration.toFixed(0), 32, 32);
 	  game.debug.text('Time until turn: ' + turnTimer.duration.toFixed(0), 32, 42);
-	  game.debug.text('Time until turn: ' + turnTimer.duration.toFixed(0), 32, 52);
+	  game.debug.text('Time until die roll: ' + turnTimer.duration.toFixed(0), 32, 52);
 }
 };
