@@ -123,8 +123,8 @@ function enemyFires(enemy)
 }
 function stepChange()
 {
-	card.body.velocity.x = game.rnd.integerInRange(-60, 60);
-	card.body.velocity.y = game.rnd.integerInRange(-60,60);
+	//card.body.velocity.x = game.rnd.integerInRange(-30, 60);
+	card.body.velocity.y = game.rnd.integerInRange(-30,60);
 }
 function dirChange()
 {
@@ -139,7 +139,7 @@ function dirChange()
 	}
 	else
 	{
-		card.body.angularAcceleration = 0;
+		card.body.angularVelocity = 0;
 	}
 }
 function update() 
