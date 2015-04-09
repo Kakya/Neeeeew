@@ -73,9 +73,9 @@ function create() {
     eBullets.setAll('outOfBoundsKill', true);
     game.physics.enable(card, Phaser.Physics.ARCADE);
 	timer = game.time.create(false);
-	timer.loop(5000, stepChange, this);
+	timer.loop(1000, stepChange, this);
 	etimer = game.time.create(false);
-	etimer.loop(5000, enemyMoves, this);
+	etimer.loop(1000, enemyMoves, this);
 	turnTimer = game.time.create(false);
 	turnTimer.loop(2000, dirChange, this)
 	turnTimer.start();
