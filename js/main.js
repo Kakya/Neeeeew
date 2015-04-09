@@ -35,7 +35,7 @@ var enemies;
 var enemy;
 var killedEnemy;
 var timer; 
-
+var turnTimer;
 function create() {
 	game.physics.startSystem(Phaser.Physics.ARCADE);
     game.world.setBounds(0, 0, 2560, 1600);
@@ -61,6 +61,9 @@ function create() {
     game.physics.enable(card, Phaser.Physics.ARCADE);
 	timer = game.time.create(false);
 	timer.loop(5000, stepChange, this);
+	turnTimer = game.time.create(false);
+	turnTimer.loop(2000, dirChange, this)
+	turnTimer.start();
 	timer.start();
 	for (var i = 0; i<10; i++)
 	{
@@ -122,6 +125,10 @@ function stepChange()
 	card.body.velocity.x = game.rnd.integerInRange(-60, 60);
 	card.body.velocity.y = game.rnd.integerInRange(-60,60);
 }
+function dirChange()
+{
+	card.body.angularAcceleration += game.rnd.integerInRange(-2500, 2500);
+}
 function update() 
 {
 	game.physics.arcade.collide(card, enemies);
@@ -135,6 +142,7 @@ function update()
 }
 
 function render() {
-	  game.debug.text('Time until event: ' + timer.duration.toFixed(0), 32, 32);
+	  game.debug.text('Time until move: ' + timer.duration.toFixed(0), 32, 32);
+	  game.debug.text('Time until turn: ' + turnTimer.duration.toFixed(0), 42, 32);
 }
 };
