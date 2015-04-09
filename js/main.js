@@ -99,6 +99,19 @@ function pexplode(bullet, card)
 	bullet.kill();
 	card.kill();
 }
+function enemyFires(enemy)
+{
+	if (game.time.now > enextFire && eBullets.countDead() > 0)
+    {
+        enextFire = game.time.now + efireRate;
+
+        var eBullet = eBullets.getFirstDead();
+
+        eBullet.reset(enemy.x + 8, enemy.y + 8);
+		eBullet.body.velocity.x=0;
+		eBullet.body.velocity.y=600;
+    }
+}
 function update() 
 {
 	game.physics.arcade.collide(card, enemies);
