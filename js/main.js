@@ -199,7 +199,7 @@ function update()
 	fDice = game.rnd.integerInRange(0,18)
 	 if (cursors.up.isDown)
     {
-        card.body.thrust(200);
+        game.physics.arcade.accelerationFromRotation(card.rotation, 200, card.body.acceleration);
     }
     else
     {
