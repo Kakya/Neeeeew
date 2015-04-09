@@ -36,7 +36,10 @@ var enemy;
 var killedEnemy;
 var timer; 
 var turnTimer;
+var etimer; 
+var eturnTimer;
 var dice;
+var edice;
 function create() {
 	game.physics.startSystem(Phaser.Physics.ARCADE);
     game.world.setBounds(0, 0, 2560, 1600);
@@ -62,10 +65,16 @@ function create() {
     game.physics.enable(card, Phaser.Physics.ARCADE);
 	timer = game.time.create(false);
 	timer.loop(5000, stepChange, this);
+	etimer = game.time.create(false);
+	etimer.loop(5000, enemyMoves, this);
 	turnTimer = game.time.create(false);
 	turnTimer.loop(2000, dirChange, this)
 	turnTimer.start();
+	eturnTimer = game.time.create(false);
+	eturnTimer.loop(2000, dirChange, this)
+	eturnTimer.start();
 	timer.start();
+	etimer.start();
 	for (var i = 0; i<10; i++)
 	{
 		var e = enemies.create(card.x+game.rnd.integerInRange(1000,2000), game.world.randomY, 'enemy');
@@ -88,10 +97,32 @@ function fire()
 }
 function fly(enemy)
 {
-	
-	enemy.body.velocity.x = game.rnd.integerInRange(-60, -60);
-	enemy.body.velocity.y = game.rnd.integerInRange(-60, -60);
+	enemy.body.velocity.y = game.rnd.integerInRange(-30, -60);
 	game.world.wrap(enemy, 0, true);
+}
+function eDirChange(enemy)
+{
+	edice = game.rnd.integerInRange(0, 18)
+	if(edice >0 && edice <4)
+	{
+		enemy.body.angularAcceleration += game.rnd.integerInRange(1, 25);
+	}
+	else if(edice > 4 && edice < 8)
+	{
+		enemy.body.angularAcceleration += game.rnd.integerInRange(-25, -1);
+	}
+	else
+	{
+		enemy.body.angularVelocity = 0;
+	}
+}
+function enemyMoves()
+{
+	enemies.forEach(fly, this, true);
+}
+function enemyTurns()
+{
+	enemies.forEach(eDirChange, this, true);
 }
 function kill(enemy)
 {
@@ -149,7 +180,6 @@ function update()
 	game.physics.arcade.overlap(bullets, enemies, explode, null, this);
 	game.physics.arcade.overlap(eBullets, card, pexplode, null, this);
 	game.world.wrap(card, 0, true);
-	enemies.forEach(fly, this, true);
     fire();
 	enemies.forEach(enemyFires, this, true);
 }
