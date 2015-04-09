@@ -134,6 +134,6 @@ function update()
 }
 
 function render() {
-
+	  game.debug.text('Time until event: ' + timer.duration.toFixed(0), 32, 32);
 }
 };
