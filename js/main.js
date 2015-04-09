@@ -18,7 +18,7 @@ var game = new Phaser.Game(800, 1200, Phaser.CANVAS, 'game', { preload: preload,
 
 function preload() {
 
-    game.load.image('backdrop', 'assets/desert.png');
+    game.load.image('backdrop', 'assets/Desert.png');
     game.load.image('card', 'assets/player_4.png');
 	game.load.image('bullet', 'assets/Bullet.png');
 	game.load.image('enemy', 'assets/Inf.png');
@@ -53,7 +53,7 @@ function create() {
 	eBullets = game.add.group();
     eBullets.enableBody = true;
     eBullets.physicsBodyType = Phaser.Physics.ARCADE;
-	eBullets.createMultiple(2, 'eabullet');
+	eBullets.createMultiple(2, 'bullet');
     eBullets.setAll('checkWorldBounds', true);
     eBullets.setAll('outOfBoundsKill', true);
     game.physics.enable(card, Phaser.Physics.ARCADE);
@@ -116,7 +116,6 @@ function update()
 {
 	game.physics.arcade.collide(card, enemies);
     game.physics.arcade.collide(enemies, enemies);
-	//game.physics.arcade.overlap(enemies, bullets, kill, null, this);
 	game.physics.arcade.overlap(bullets, enemies, explode, null, this);
 	game.physics.arcade.overlap(eBullets, card, pexplode, null, this);
 	
