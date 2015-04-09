@@ -76,12 +76,12 @@ function create() {
 	etimer.loop(5000, enemyMoves, this);
 	turnTimer = game.time.create(false);
 	turnTimer.loop(2000, dirChange, this)
-	//turnTimer.start();
+	turnTimer.start();
 	eturnTimer = game.time.create(false);
 	eturnTimer.loop(2000, dirChange, this)
 	eturnTimer.start();
-	//timer.start();
-	//etimer.start();
+	timer.start();
+	etimer.start();
 	game.physics.p2.enable(card);
 	for (var i = 0; i<10; i++)
 	{
@@ -197,27 +197,6 @@ function update()
 	game.physics.arcade.overlap(eBullets, card, pexplode, null, this);
 	game.world.wrap(card, 0, true);
 	fDice = game.rnd.integerInRange(0,18)
-	 if (cursors.up.isDown)
-    {
-        game.physics.arcade.accelerationFromRotation(card.rotation, 200, card.body.acceleration);
-    }
-    else
-    {
-        card.body.acceleration.set(0);
-    }
-
-    if (cursors.left.isDown)
-    {
-        card.body.angularVelocity = -300;
-    }
-    else if (cursors.right.isDown)
-    {
-        card.body.angularVelocity = 300;
-    }
-    else
-    {
-        card.body.angularVelocity = 0;
-    }
 	if(fDice <6)
 	{
 		fire();
