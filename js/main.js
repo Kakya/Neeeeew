@@ -52,7 +52,7 @@ function create() {
 	enemies.enableBody = true;
     game.camera.follow(card);
 	card.anchor.setTo(0.5, 0.5);
-	card.scale = 0.5;
+	card.scale = 0.75;
 	bullets = game.add.group();
     bullets.enableBody = true;
     bullets.physicsBodyType = Phaser.Physics.ARCADE;
