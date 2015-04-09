@@ -43,6 +43,7 @@ var edice;
 var fDice;
 var efDice;
 var mDice;
+var cursors;
 function create() {
 	game.physics.startSystem(Phaser.Physics.ARCADE);
     game.world.setBounds(0, 0, 2560, 1600);
@@ -73,18 +74,19 @@ function create() {
 	etimer.loop(5000, enemyMoves, this);
 	turnTimer = game.time.create(false);
 	turnTimer.loop(2000, dirChange, this)
-	turnTimer.start();
+	//turnTimer.start();
 	eturnTimer = game.time.create(false);
 	eturnTimer.loop(2000, dirChange, this)
 	eturnTimer.start();
-	timer.start();
-	etimer.start();
+	//timer.start();
+	//etimer.start();
 	for (var i = 0; i<10; i++)
 	{
 		var e = enemies.create(card.x+game.rnd.integerInRange(1000,2000), game.world.randomY, 'enemy');
 		e.anchor.setTo(0.5, 0.5);
 		game.physics.enable(e, Phaser.Physics.ARCADE);
 	}
+	cursors = game.input.keyboard.createCursorKeys();
 }
 function fire() 
 {
@@ -192,6 +194,27 @@ function update()
 	game.physics.arcade.overlap(eBullets, card, pexplode, null, this);
 	game.world.wrap(card, 0, true);
 	fDice = game.rnd.integerInRange(0,18)
+	 if (cursors.up.isDown)
+    {
+        game.physics.arcade.accelerationFromRotation(sprite.rotation, 200, sprite.body.acceleration);
+    }
+    else
+    {
+        sprite.body.acceleration.set(0);
+    }
+
+    if (cursors.left.isDown)
+    {
+        sprite.body.angularVelocity = -300;
+    }
+    else if (cursors.right.isDown)
+    {
+        sprite.body.angularVelocity = 300;
+    }
+    else
+    {
+        sprite.body.angularVelocity = 0;
+    }
 	if(fDice <6)
 	{
 		fire();
