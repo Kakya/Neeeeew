@@ -167,13 +167,17 @@ function stepChange()
 	if(movDie > 5 && movDie < 12)
 	{
 		mDice = game.rnd.integerInRange(0, 18);
-		if (mDice > 0 && mDice < 9)
+		if (mDice >= 0 && mDice < 9)
 		{
 			game.physics.arcade.accelerationFromRotation(card.rotation, game.rnd.integerInRange(1,60), card.body.acceleration);
 		}
-		else if (mDice > 9 && mDice < 13)
+		else if (mDice >= 9 && mDice < 13)
 		{
 			game.physics.arcade.accelerationFromRotation(card.rotation, game.rnd.integerInRange(-30,-1), card.body.acceleration);
+		}
+		else if (mDice >= 13 && mDice <15)
+		{
+			card.body.velocity = 0;
 		}
 	}
 }
