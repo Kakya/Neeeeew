@@ -162,6 +162,7 @@ function stepChange()
 	if (mDice >0 && <9)
 	{
 		game.physics.arcade.velocityFromAngle(card.angle, 300, card.body.velocity);
+	}
 	else if (mDice >9 && < 13)
 	{
 		game.physics.arcade.velocityFromAngle(card.angle, 300, card.body.velocity);
