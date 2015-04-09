@@ -159,11 +159,11 @@ function enemyFires(enemy)
 function stepChange()
 {
 	mDice = game.rnd.integerInRange(0, 18);
-	if (mDice >0 && < 9)
+	if (mDice > 0 && mDice < 9)
 	{
 		game.physics.arcade.velocityFromAngle(card.angle, 300, card.body.velocity);
 	}
-	else if (mDice >9 && < 13)
+	else if (mDice > 9 && mDice < 13)
 	{
 		game.physics.arcade.velocityFromAngle(card.angle, 300, card.body.velocity);
 	}
@@ -171,7 +171,7 @@ function stepChange()
 function dirChange()
 {
 	dice = game.rnd.integerInRange(0, 18)
-	if(dice >0 && dice <4)
+	if(dice > 0 && dice < 4)
 	{
 		card.body.angularVelocity += game.rnd.integerInRange(1, 25);
 	}
