@@ -47,7 +47,7 @@ function create() {
 	game.physics.startSystem(Phaser.Physics.ARCADE);
     game.world.setBounds(0, 0, 2560, 1600);
     game.add.sprite(0, 0, 'backdrop');
-    card = game.add.sprite(200, 200, 'card');
+    card = game.add.sprite(300, 300, 'card');
 	card.enableBody = true;
 	enemies = game.add.group(); 
 	enemies.enableBody = true;
@@ -161,11 +161,11 @@ function stepChange()
 	mDice = game.rnd.integerInRange(0, 18);
 	if (mDice > 0 && mDice < 9)
 	{
-		game.physics.arcade.velocityFromAngle(card.angle, 300, card.body.velocity);
+		game.physics.arcade.accelerationFromRotation(card.rotation, 200, card.body.acceleration);
 	}
 	else if (mDice > 9 && mDice < 13)
 	{
-		game.physics.arcade.velocityFromAngle(card.angle, 300, card.body.velocity);
+		game.physics.arcade.accelerationFromRotation(card.rotation, 200, card.body.acceleration);
 	}
 }
 function dirChange()
