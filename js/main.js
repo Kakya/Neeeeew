@@ -85,7 +85,7 @@ function fly(enemy)
 	
 	enemy.body.velocity.x = game.rnd.integerInRange(-60, -60);
 	enemy.body.velocity.y = game.rnd.integerInRange(-60, -60);
-	game.world.wrap(enemy, 0, false);
+	game.world.wrap(enemy, 0, true);
 }
 function kill(enemy)
 {
@@ -127,7 +127,7 @@ function update()
 		card.body.velocity.y = game.rnd.integerInRange(-60,60);
 	}
 	timer.loop(5000, stepChange, this);
-	game.world.wrap(card, 0, false);
+	game.world.wrap(card, 0, true);
 	enemies.forEach(fly, this, true);
     fire();
 	enemies.forEach(enemyFires, this, true);
