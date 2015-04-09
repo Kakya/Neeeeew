@@ -34,6 +34,8 @@ var eBullets;
 var enemies;
 var enemy;
 var killedEnemy;
+var timer; 
+
 function create() {
 	game.physics.startSystem(Phaser.Physics.ARCADE);
     game.world.setBounds(0, 0, 2560, 1600);
@@ -57,6 +59,7 @@ function create() {
     eBullets.setAll('checkWorldBounds', true);
     eBullets.setAll('outOfBoundsKill', true);
     game.physics.enable(card, Phaser.Physics.ARCADE);
+	timer = game.time.create(false);
 	for (var i = 0; i<10; i++)
 	{
 		var e = enemies.create(card.x+game.rnd.integerInRange(1000,2000), game.world.randomY, 'enemy');
@@ -109,7 +112,7 @@ function enemyFires(enemy)
 
         eBullet.reset(enemy.x + 8, enemy.y + 8);
 		eBullet.body.velocity.x=0;
-		eBullet.body.velocity.y=600;
+		eBullet.body.velocity.y=-600;
     }
 }
 function update() 
@@ -118,10 +121,12 @@ function update()
     game.physics.arcade.collide(enemies, enemies);
 	game.physics.arcade.overlap(bullets, enemies, explode, null, this);
 	game.physics.arcade.overlap(eBullets, card, pexplode, null, this);
-	
-    card.body.velocity.x = game.rnd.integerInRange(-60, 60);
-    card.body.velocity.y = game.rnd.integerInRange(-60,60);
-	
+	function stepChange()
+	{
+		card.body.velocity.x = game.rnd.integerInRange(-60, 60);
+		card.body.velocity.y = game.rnd.integerInRange(-60,60);
+	}
+	timer.loop(5000, stepChange, this);
 	game.world.wrap(card, 0, false);
 	enemies.forEach(fly, this, true);
     fire();
