@@ -43,6 +43,7 @@ var edice;
 var fDice;
 var efDice;
 var mDice;
+var movDie;
 var cursors;
 function create() {
 	game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -111,19 +112,19 @@ function fly(enemy)
 }
 function eDirChange(enemy)
 {
-	edice = game.rnd.integerInRange(0, 18)
-	if(edice >0 && edice <4)
-	{
-		enemy.body.angularVelocity += game.rnd.integerInRange(1, 25);
-	}
-	else if(edice > 4 && edice < 8)
-	{
-		enemy.body.angularVelocity += game.rnd.integerInRange(-25, -1);
-	}
-	else
-	{
-		enemy.body.angularVelocity = 0;
-	}
+		edice = game.rnd.integerInRange(0, 18)
+		if(edice >0 && edice <4)
+		{
+			enemy.body.angularVelocity += game.rnd.integerInRange(1, 25);
+		}
+		else if(edice > 4 && edice < 8)
+		{
+			enemy.body.angularVelocity += game.rnd.integerInRange(-25, -1);
+		}
+		else
+		{
+			enemy.body.angularVelocity = 0;
+		}
 }
 function enemyMoves()
 {
@@ -163,36 +164,41 @@ function enemyFires(enemy)
 }
 function stepChange()
 {
-	mDice = game.rnd.integerInRange(0, 18);
-	if (mDice > 0 && mDice < 9)
+	if(movDie > 5 && movDie < 12)
 	{
-		game.physics.arcade.accelerationFromRotation(card.rotation, game.rnd.integerInRange(1,60), card.body.acceleration);
-	}
-	else if (mDice > 9 && mDice < 13)
-	{
-		game.physics.arcade.accelerationFromRotation(card.rotation, game.rnd.integerInRange(-30,-1), card.body.acceleration);
+		mDice = game.rnd.integerInRange(0, 18);
+		if (mDice > 0 && mDice < 9)
+		{
+			game.physics.arcade.accelerationFromRotation(card.rotation, game.rnd.integerInRange(1,60), card.body.acceleration);
+		}
+		else if (mDice > 9 && mDice < 13)
+		{
+			game.physics.arcade.accelerationFromRotation(card.rotation, game.rnd.integerInRange(-30,-1), card.body.acceleration);
+		}
 	}
 }
 function dirChange()
 {
 	dice = game.rnd.integerInRange(0, 18)
-	if(dice > 0 && dice < 4)
+	if(movDie > 0 && movDie < 4)
 	{
-		card.body.velocity = 0;
-		card.body.angularVelocity += game.rnd.integerInRange(1, 25);
-	}
-	else if(dice > 4 && dice < 8)
-	{
-		card.body.velocity = 0;
-		card.body.angularVelocity += game.rnd.integerInRange(-25, -1);
-	}
-	else
-	{
-		card.body.angularVelocity = 0;
+		if(dice > 0 && dice < 4)
+		{
+			card.body.angularVelocity += game.rnd.integerInRange(1, 25);
+		}
+		else if(dice > 4 && dice < 8)
+		{
+			card.body.angularVelocity += game.rnd.integerInRange(-25, -1);
+		}
+		else
+		{
+			card.body.angularVelocity = 0;
+		}
 	}
 }
 function update() 
 {
+	movDie = game.rnd.integerInRange(0,18);
 	game.physics.arcade.collide(card, enemies);
     game.physics.arcade.collide(enemies, enemies);
 	game.physics.arcade.overlap(bullets, enemies, explode, null, this);
